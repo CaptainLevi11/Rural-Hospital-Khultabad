@@ -1,0 +1,89 @@
+.header-middle {
+    background-color: white;
+    padding: 10px 0;
+}
+
+.header-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.h1-logo {
+    font-size: 1.5rem;
+    color: black;
+}
+
+
+/* Left Side - Emblem & Text */
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.left-section img {
+    height: 14vh;
+    margin-right: 10px;
+}
+
+.left-section .logo_text {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-section .h1-logo {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Right Side - Beti Bachao & Digital India */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.right-section img {
+    height: 11vh;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left-section, .right-section {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+}
+
+
+/* my work */
+.logo_text h1{
+    font-size: 1.9rem;
+}
+.center-section{
+    text-align: center;
+}
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures it's above other content */
+    padding: 10px 0; /* Optional: Adds some spacing */
+    border-bottom: 1px solid #ddd; /* Optional: Adds a subtle border */
+}
+
+.info-tabs{
+    margin: 10px 5px;
+    overflow: hidden;
+}

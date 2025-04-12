@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - Rural Hospital Khultabad</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4b0082;
+            --secondary-color: #6d30e9;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header-middle {
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-wrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Left Side - Emblem & Text */
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-section img {
+            height: 14vh;
+            margin-right: 10px;
+        }
+
+        /* Center: Government Title & Hospital Name */
+        .center-section {
+            text-align: center;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .gov-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #700000;
+            margin: 0;
+        }
+
+        .hospital-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin: 5px 0 0;
+        }
+
+        /* Right Side - Beti Bachao & Digital India */
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .right-section img {
+            height: 11vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Menu Styles */
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .menu li {
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .menu li a:hover {
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #444;
+            border-radius: 5px;
+            padding: 10px 0;
+            min-width: 180px;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .dropdown li {
+            display: block;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown li a:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown-container:hover .dropdown {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Documents Page Styles */
+        .documents-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .documents-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .documents-container {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        .document-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .category-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .document-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .document-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .document-icon {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            font-size: 50px;
+            color: var(--primary-color);
+        }
+
+        .document-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .document-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .document-content p {
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .download-btn, .view-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .download-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .view-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .view-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .left-section,
+            .right-section {
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .right-section {
+                margin-top: 15px;
+            }
+
+            .menu {
+                flex-direction: column;
+                display: none;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .dropdown {
+                position: static;
+                display: none;
+                opacity: 1;
+                width: 100%;
+                background: #555;
+            }
+
+            .dropdown-container:hover .dropdown {
+                display: none;
+            }
+
+            .dropdown-container.active .dropdown {
+                display: block;
+            }
+
+            .documents-header h1 {
+                font-size: 2rem;
+            }
+
+            .document-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .documents-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header-middle">
+        <div class="header-wrapper">
+            <div class="container">
+                <!-- Left Side: Emblem -->
+                <div class="left-section">
+                    <a href="https://phd.maharashtra.gov.in/" title="Go to home">
+                        <img id="logo" class="emblem"
+                            src="https://phd.maharashtra.gov.in/wp-content/themes/sdo-theme/images/emblem.svg"
+                            alt="State Emblem of India" width="100" height="100">
+                    </a>
+                </div>
+
+                <!-- Center: Government Title & Hospital Name -->
+                <div class="center-section">
+                    <p class="gov-text">Government of Maharashtra Public Health Department</p>
+                    <h1 class="hospital-name">RURAL HOSPITAL KHULTABAD DISTRICT AURANGABAD</h1>
+                </div>
+
+                <!-- Right Side: Beti Bachao & Digital India -->
+                <div class="right-section">
+                    <a href="https://wcd.nic.in/bbbp-schemes" target="_blank">
+                        <img src="https://cdnbbsr.s3waas.gov.in/s3feecee9f1643651799ede2740927317a/uploads/2025/01/202501211436521296.png"
+                            alt="Beti Bachao Beti Padhao Logo">
+                    </a>
+                    <a href="https://www.digitalindia.gov.in/" target="_blank">
+                        <img src="https://cdnbbsr.s3waas.gov.in/s3feecee9f1643651799ede2740927317a/uploads/2019/03/2019031587.png"
+                            alt="Digital India">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown-container">
+                <a href="schemes.html">Schemes/Programmes</a>
+                <ul class="dropdown">
+                    <li><a href="schemes.html#central">Central Government</a></li>
+                    <li><a href="schemes.html#state">State Government</a></li>
+                    <li><a href="schemes.html#joint">Joint Ventures</a></li>
+                </ul>
+            </li>
+            <li><a href="notices.html">Notices</a></li>
+            <li><a href="documents.html" class="active">Documents</a></li>
+            <li><a href="rtsa.html">RTSA</a></li>
+            <li class="dropdown-container">
+                <a href="about.html">About Us</a>
+                <ul class="dropdown">
+                    <li><a href="about.html#directory">Directory</a></li>
+                    <li><a href="about.html#gallery">Gallery</a></li>
+                    <li><a href="about.html#staff">Staff</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Documents Page Content -->
+    <div class="documents-header">
+        <h1>Important Documents</h1>
+        <p>Access all important forms, reports, and other documents related to our hospital</p>
+    </div>
+
+    <div class="documents-container">
+        <div class="document-categories">
+            <button class="category-btn active" onclick="filterDocuments('all')">All Documents</button>
+            <button class="category-btn" onclick="filterDocuments('forms')">Forms</button>
+            <button class="category-btn" onclick="filterDocuments('reports')">Reports</button>
+            <button class="category-btn" onclick="filterDocuments('policies')">Policies</button>
+            <button class="category-btn" onclick="filterDocuments('acts')">Acts & Rules</button>
+        </div>
+
+        <div class="document-list">
+            <!-- Forms -->
+            <div class="document-card" data-category="forms">
+                <div class="document-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="document-content">
+                    <h3>Patient Registration Form</h3>
+                    <p>Standard form for new patient registration at the hospital.</p>
+                    <div class="document-actions">
+                        <a href="#" class="download-btn">Download</a>
+                        <a href="#" class="view-btn">View Online</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports -->
+            <div class="document-card" data-category="reports">
+                <div class="document-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="document-content">
+                    <h3>Annual Health Report 2022-23</h3>
+                    <p>Comprehensive report on hospital services and health indicators for the fiscal year.</p>
+                    <div class="document-actions">
+                        <a href="#" class="download-btn">Download</a>
+                        <a href="#" class="view-btn">View Online</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policies -->
+            <div class="document-card" data-category="policies">
+                <div class="document-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="document-content">
+                    <h3>Hospital Infection Control Policy</h3>
+                    <p>Guidelines and protocols for infection prevention and control in the hospital.</p>
+                    <div class="document-actions">
+                        <a href="#" class="download-btn">Download</a>
+                        <a href="#" class="view-btn">View Online</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acts & Rules -->
+            <div class="document-card" data-category="acts">
+                <div class="document-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <div class="document-content">
+                    <h3>Clinical Establishment Act</h3>
+                    <p>Complete text of the Clinical Establishment (Registration and Regulation) Act.</p>
+                    <div class="document-actions">
+                        <a href="#" class="download-btn">Download</a>
+                        <a href="#" class="view-btn">View Online</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Documents -->
+            <div class="document-card" data-category="forms">
+                <div class="document-icon">
+                    <i class="fas fa-file-medical"></i>
+                </div>
+                <div class="document-content">
+                    <h3>Medical Certificate Form</h3>
+                    <p>Standard format for issuing medical certificates to patients.</p>
+                    <div class="document-actions">
+                        <a href="#" class="download-btn">Download</a>
+                        <a href="#" class="view-btn">View Online</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-card" data-category="reports">
+                <div class="document-icon">
+                    <i class="fas fa-procedures"></i>
+                </div>
+                <div class="document-content">
+                    <h3>Monthly OPD Report - June 2023</h3>
+                    <p>Statistical report of outpatient department services for the month.</p>
+                    <div class="document-actions">
+                        <a href="#" class="download-btn">Download</a>
+                        <a href="#" class="view-btn">View Online</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter documents by category
+        function filterDocuments(category) {
+            // Update active category button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if ((category === 'all' && btn.textContent.includes('All')) || 
+                    (category === 'forms' && btn.textContent.includes('Forms')) ||
+                    (category === 'reports' && btn.textContent.includes('Reports')) ||
+                    (category === 'policies' && btn.textContent.includes('Policies')) ||
+                    (category === 'acts' && btn.textContent.includes('Acts'))) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Show/hide documents
+            document.querySelectorAll('.document-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Mobile menu toggle functionality would go here
+        // You can add it if you implement a mobile menu button
+    </script>
+</body>
+</html>

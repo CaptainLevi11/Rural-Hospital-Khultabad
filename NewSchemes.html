@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- fix the home (onclick) -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schemes & Programs - Rural Hospital Khultabad</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4b0082;
+            --secondary-color: #6d30e9;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --govt-blue: #1a3e8c;
+            --govt-gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header-middle {
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-wrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Left Side - Emblem & Text */
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-section img {
+            height: 14vh;
+            margin-right: 10px;
+        }
+
+        /* Center: Government Title & Hospital Name */
+        .center-section {
+            text-align: center;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .gov-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #700000;
+            margin: 0;
+        }
+
+        .hospital-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin: 5px 0 0;
+        }
+
+        /* Right Side - Beti Bachao & Digital India */
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .right-section img {
+            height: 11vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Menu Styles */
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .menu li {
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .menu li a:hover {
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #444;
+            border-radius: 5px;
+            padding: 10px 0;
+            min-width: 180px;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .dropdown li {
+            display: block;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown li a:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Show dropdown on hover */
+        .dropdown-container:hover .dropdown {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Schemes Page Styles */
+        .schemes-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .schemes-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .schemes-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--govt-gold);
+        }
+
+        .schemes-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .schemes-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+        }
+
+        .scheme-card {
+            background: white;
+            border-radius: 10px;
+            width: 350px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .scheme-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .scheme-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .scheme-icon {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .scheme-content {
+            padding: 0 25px 25px;
+        }
+
+        .scheme-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .scheme-content p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .scheme-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .scheme-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Scheme Categories */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .category-tab {
+            padding: 10px 25px;
+            background-color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .category-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .category-tab:hover:not(.active) {
+            background-color: #e6e6ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .left-section,
+            .right-section {
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .right-section {
+                margin-top: 15px;
+            }
+
+            .menu {
+                flex-direction: column;
+                display: none;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .dropdown {
+                position: static;
+                display: none;
+                opacity: 1;
+                width: 100%;
+                background: #555;
+            }
+
+            .dropdown-container:hover .dropdown {
+                display: none;
+            }
+
+            .dropdown-container.active .dropdown {
+                display: block;
+            }
+
+            .schemes-header h1 {
+                font-size: 2rem;
+            }
+
+            .scheme-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .schemes-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .schemes-header p {
+                font-size: 1rem;
+            }
+
+            .category-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header-middle">
+        <div class="header-wrapper">
+            <div class="container">
+                <!-- Left Side: Emblem -->
+                <div class="left-section">
+                    <a href="https://phd.maharashtra.gov.in/" title="Go to home">
+                        <img id="logo" class="emblem"
+                            src="https://phd.maharashtra.gov.in/wp-content/themes/sdo-theme/images/emblem.svg"
+                            alt="State Emblem of India" width="100" height="100">
+                    </a>
+                </div>
+
+                <!-- Center: Government Title & Hospital Name -->
+                <div class="center-section">
+                    <p class="gov-text">Government of Maharashtra Public Health Department</p>
+                    <h1 class="hospital-name">RURAL HOSPITAL KHULTABAD DISTRICT AURANGABAD</h1>
+                </div>
+
+                <!-- Right Side: Beti Bachao & Digital India -->
+                <div class="right-section">
+                    <a href="https://wcd.nic.in/bbbp-schemes" target="_blank">
+                        <img src="https://cdnbbsr.s3waas.gov.in/s3feecee9f1643651799ede2740927317a/uploads/2025/01/202501211436521296.png"
+                            alt="Beti Bachao Beti Padhao Logo">
+                    </a>
+                    <a href="https://www.digitalindia.gov.in/" target="_blank">
+                        <img src="https://cdnbbsr.s3waas.gov.in/s3feecee9f1643651799ede2740927317a/uploads/2019/03/2019031587.png"
+                            alt="Digital India">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="menu">
+            <li><a href="NewIndex.html">Home</a></li>
+            <li class="dropdown-container active">
+                <a href="NewSchemes.html">Schemes/Programmes</a>
+                <ul class="dropdown">
+                    <li><a href="#central">Central Government</a></li>
+                    <li><a href="#state">State Government</a></li>
+                    <li><a href="#joint">Joint Ventures</a></li>
+                </ul>
+            </li>
+            <li><a href="NewNotices.html">Notices</a></li>
+            <li><a href="NewDocuments.html">Documents</a></li>
+            <li><a href="NewRTSA.html">RTSA</a></li>
+            <li class="dropdown-container">
+                <a href="NewAboutUs.html">About Us</a>
+                <ul class="dropdown">
+                    <li><a href="#">Directory</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Staff</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Schemes Page Content -->
+    <div class="schemes-header">
+        <h1>Schemes & Programs</h1>
+        <p>Explore various government health schemes and programs available for citizens</p>
+    </div>
+
+    <div class="category-tabs">
+        <div class="category-tab active" onclick="filterSchemes('all')">All Schemes</div>
+        <div class="category-tab" onclick="filterSchemes('central')">Central Government</div>
+        <div class="category-tab" onclick="filterSchemes('state')">State Government</div>
+        <div class="category-tab" onclick="filterSchemes('joint')">Joint Ventures</div>
+    </div>
+
+    <div class="schemes-container">
+        <!-- Central Government Schemes -->
+        <div class="scheme-card" data-category="central" id="central">
+            <div class="scheme-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Ayushman Bharat Yojana</h3>
+                <p>Health insurance scheme providing coverage of ₹5 lakh per family per year for secondary and tertiary care hospitalization.</p>
+                <a href="https://pmjay.gov.in/" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <div class="scheme-card" data-category="central">
+            <div class="scheme-icon">
+                <i class="fas fa-baby"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Janani Suraksha Yojana</h3>
+                <p>Safe motherhood intervention program to reduce maternal and neonatal mortality by promoting institutional delivery.</p>
+                <a href="https://nhm.gov.in/index1.php?lang=1&level=2&sublinkid=822&lid=218" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <div class="scheme-card" data-category="central">
+            <div class="scheme-icon">
+                <i class="fas fa-child"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Rashtriya Bal Swasthya Karyakram</h3>
+                <p>Child health screening and early intervention services for defects, diseases, deficiencies and developmental delays.</p>
+                <a href="https://rbsk.gov.in/" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <!-- State Government Schemes -->
+        <div class="scheme-card" data-category="state" id="state">
+            <div class="scheme-icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Mahatma Jyotiba Phule Jan Arogya Yojana</h3>
+                <p>Maharashtra's health insurance scheme providing coverage up to ₹1.5 lakh per family per year.</p>
+                <a href="https://www.jeevandayee.gov.in/" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <div class="scheme-card" data-category="state">
+            <div class="scheme-icon">
+                <i class="fas fa-female"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Majhi Kanya Bhagyashree</h3>
+                <p>Scheme for girl child welfare providing financial assistance for education and health.</p>
+                <a href="https://womenchild.maharashtra.gov.in/content/innerpage/majhi-kanya-bhagyashree.php" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <div class="scheme-card" data-category="state">
+            <div class="scheme-icon">
+                <i class="fas fa-ambulance"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Maharashtra Emergency Medical Services</h3>
+                <p>Free ambulance services (108) for medical emergencies across Maharashtra.</p>
+                <a href="https://www.maharashtra.gov.in/1125/Public-Services" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <!-- Joint Venture Schemes -->
+        <div class="scheme-card" data-category="joint" id="joint">
+            <div class="scheme-icon">
+                <i class="fas fa-pills"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Free Drug Service Initiative</h3>
+                <p>Provides essential medicines free of cost at public health facilities.</p>
+                <a href="https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=1041&lid=389" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <div class="scheme-card" data-category="joint">
+            <div class="scheme-icon">
+                <i class="fas fa-flask"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>Free Diagnostic Service Initiative</h3>
+                <p>Provides essential diagnostic services free of cost at public health facilities.</p>
+                <a href="https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=1042&lid=390" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+
+        <div class="scheme-card" data-category="joint">
+            <div class="scheme-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <div class="scheme-content">
+                <h3>National Health Mission</h3>
+                <p>Joint initiative for strengthening healthcare infrastructure and services.</p>
+                <a href="https://nhm.gov.in/" class="scheme-btn" target="_blank">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter schemes by category
+        function filterSchemes(category) {
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if ((category === 'all' && tab.textContent.includes('All')) || 
+                    (category === 'central' && tab.textContent.includes('Central')) ||
+                    (category === 'state' && tab.textContent.includes('State')) ||
+                    (category === 'joint' && tab.textContent.includes('Joint'))) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Show/hide schemes
+            document.querySelectorAll('.scheme-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Scroll to section if filtered
+            if (category !== 'all') {
+                const section = document.getElementById(category);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Handle hash in URL (when coming from dropdown)
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if (['central', 'state', 'joint'].includes(hash)) {
+                filterSchemes(hash);
+            }
+        });
+
+        // Mobile menu toggle functionality would go here
+        // You can add it if you implement a mobile menu button
+    </script>
+</body>
+
+</html>
